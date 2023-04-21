@@ -1,0 +1,25 @@
+{
+  "name": "learnify",
+  "version": "1.0.0",
+  "description": "Learnify is an all-in-one website that allows users to learn and revise a range of subjects, both at GCSE and A-level standards. Learnify aims to make learning more enjoyable for users, with bright colours and engaging features such as the quiz and flashcard pages. On Learnify you have the choice between nine different subjects, ranging from Maths to Geography and even Sports Science! If quizzes aren't your thing, the flashcard page allows you to test your knowledge and even create custom flashcards. You'll be able to view all your custom and favourite flashcards on your Dashboard for ease of use.",
+  "main": "index.js",
+  "scripts": {
+    "server": "npm run dev --prefix api",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MisterCxmpy/Learnify.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MisterCxmpy/Learnify/issues"
+  },
+  "homepage": "https://github.com/MisterCxmpy/Learnify#readme",
+  "dependencies": {
+    "concurrently": "^8.0.1"
+  }
+}

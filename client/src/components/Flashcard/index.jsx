@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./index.module.css"
 
-export default function Flashcard({f, favourites}) {
+export default function Flashcard({f, favourites, setFavourites}) {
 
   const [flippedCards, setFlippedCards] = useState([]);
 

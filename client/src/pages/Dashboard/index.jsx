@@ -8,6 +8,17 @@ export default function Dashboard() {
   const [favourites, setFavourites] = useState([]);
   const [userCreated, setUserCreated] = useState([]);
 
+  const fetchFavourites = async () => {
+    const response = await fetch(
+      `http://localhost:8080/flashcards/favorite/user/${localStorage.getItem("user_id")}`
+    );
+
+    const data = await response.json();
+    setFlashcards(data);
+
+    if (data.length > 0) setFavourites(data.map((d) => d.card_id));
+  };
+
   useEffect(() => {
     const fetchUser = async () => {
       const response = await fetch(
@@ -15,15 +26,6 @@ export default function Dashboard() {
       );
       const data = await response.text();
       setUsername(data);
-    };
-    
-    const fetchFavourites = async () => {
-      const response = await fetch(
-        `http://localhost:8080/flashcards/favorite/user/${localStorage.getItem("user_id")}`
-      );
-      const data = await response.json();
-      setFlashcards(data);
-      setFavourites(data.map((d) => d.card_id));
     };
     
     const fetchUserCreated = async () => {
@@ -43,6 +45,10 @@ export default function Dashboard() {
     fetchUserCreated();
   }, []);
 
+  useEffect(() => {
+    fetchFavourites()
+  }, [favourites])
+
   return (
     <div className={styles.dashboard}>
       <div className={styles.container}>
@@ -56,6 +62,7 @@ export default function Dashboard() {
                   key={flashcard.card_id}
                   f={flashcard}
                   favourites={favourites}
+                  setFavourites={setFavourites}
                 />
               ))
             ) : (
@@ -72,6 +79,7 @@ export default function Dashboard() {
                   key={flashcard.card_id}
                   f={flashcard}
                   favourites={favourites}
+                  setFavourites={setFavourites}
                 />
               ))
             ) : (
