@@ -1,13 +1,38 @@
 import React, { useState } from "react";
 import styles from "./index.module.css";
 
-export default function CreateFlashcardModal({ showModal, setShowModal, getData, primary, secondary }) {
+export default function CreateFlashcardModal({ showModal, setShowModal, getData, category  }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [subject, setSubject] = useState("");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [error, setError] = useState("");
 
+  const getColours = () => {
+    switch (category) {
+      case "Geography":
+        return { primary: "#4CB731", secondary: "#2C8715" };
+      case "History":
+        return { primary: "#F26E6E", secondary: "#CF4B4B" };
+      case "Chemistry":
+        return { primary: "#368DDD", secondary: "#1D6CB5" };
+      case "Biology":
+        return { primary: "#D47902", secondary: "#B16610" };
+      case "Physics":
+        return { primary: "#F26E6E", secondary: "#CF4B4B" };
+      case "Maths":
+        return { primary: "#368DDD", secondary: "#1D6CB5" };
+      case "English Literature":
+        return { primary: "#D47902", secondary: "#B16610" };
+      case "Sports Science":
+        return { primary: "#E5DF46", secondary: "#D8B603" };
+      case "Religious Education":
+        return { primary: "#4CB731", secondary: "#2C8715" };
+      default:
+        console.log(category);
+        break;
+    }
+  };
 
   function handleFlip() {
     setIsFlipped(!isFlipped);
@@ -74,7 +99,7 @@ export default function CreateFlashcardModal({ showModal, setShowModal, getData,
       style={{ display: showModal ? "flex" : "none" }}
     >
       <form onSubmit={handleFormSubmit} role='form'>
-        <div className={styles["create-flashcard"]} style={{ transform: isFlipped ? "rotateY(180deg)" : "none", background: primary, border: `7px solid ${secondary}`  }} onClick={handleFlip}>
+        <div className={styles["create-flashcard"]} style={{ transform: isFlipped ? "rotateY(180deg)" : "none", background: getColours().primary, border: `7px solid ${getColours().secondary}`  }} onClick={handleFlip}>
           <div className={styles["front"]}>
             <h1 className={styles["title"]}>Create flashcard</h1>
             <select value={subject} onChange={handleSubjectChange} onClick={handleInputClick} name="subjects" role='subject'>

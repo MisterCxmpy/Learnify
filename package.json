@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "server": "npm run dev --prefix api",
+    "setup": "npm run setup-db --prefix api",
     "client": "npm run dev --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "setup-db": "npm run setup"
   },
   "repository": {
     "type": "git",

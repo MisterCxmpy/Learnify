@@ -15,8 +15,8 @@ CREATE TABLE users (
   PRIMARY KEY (user_id)
 );
 
-INSERT INTO users (username, email, password, isAdmin) VALUES ('admin', 'admin@appname.org', 'admin', TRUE);
-INSERT INTO users (username, email, password) VALUES ('users', 'users@appname.org', 'users');
+INSERT INTO users (username, email, password, isAdmin) VALUES ('dummy', 'dummy@learnify.org', 'dummy', FALSE);
+INSERT INTO users (username, email, password, isAdmin) VALUES ('cosgun', 'cosgun@learnify.org', '$2b$10$0q.toeZZj9aCJm8kDWL6qO5c4zSk/3Z3Mue4egfAB/ZAiUG50TrF.', TRUE);
 
 
 

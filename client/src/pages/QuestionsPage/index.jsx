@@ -77,6 +77,8 @@ export default function QuestionsPage() {
     if (!res.ok) {
       console.log("Failed to create flashcard");
     }
+    
+    navigate("/dashboard")
   }
 
   function displayQuestion() {
