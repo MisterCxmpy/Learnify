@@ -13,29 +13,7 @@ export default function FlashcardsList() {
   const navigate = useNavigate();
 
   const getColours = () => {
-    switch (category) {
-      case "Geography":
-        return { primary: "#4CB731", secondary: "#2C8715" };
-      case "History":
-        return { primary: "#F26E6E", secondary: "#CF4B4B" };
-      case "Chemistry":
-        return { primary: "#368DDD", secondary: "#1D6CB5" };
-      case "Biology":
-        return { primary: "#D47902", secondary: "#B16610" };
-      case "Physics":
-        return { primary: "#F26E6E", secondary: "#CF4B4B" };
-      case "Maths":
-        return { primary: "#368DDD", secondary: "#1D6CB5" };
-      case "English Literature":
-        return { primary: "#D47902", secondary: "#B16610" };
-      case "Sports Science":
-        return { primary: "#E5DF46", secondary: "#D8B603" };
-      case "Religious Education":
-        return { primary: "#4CB731", secondary: "#2C8715" };
-      default:
-        console.log(category);
-        break;
-    }
+    // Colours logic
   };
 
   function handleFlip(cardId) {

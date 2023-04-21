@@ -1,20 +1,72 @@
 .main {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f8f8f8;
+    width: 100%;
   }
   
+.options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.error-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  height: 300px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .h1 {
   font-size: 4rem;
-  color: #333;
-  margin-bottom: 2rem;
+  color: var(--font-colour-dark);
 }
   
+.message {
+  font-size: 1.5rem;
+  color: var(--font-colour-dark);
+}
+
 .link {
   font-size: 2rem;
   color: #0077cc;
 }
   
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  border: none;
+  background: var(--nav-colour);
+  font-size: 20px;
+  color: #d4d4d4;
+  cursor: pointer;
+  transition: 0.25s;
+  text-decoration: none;
+  width: max-content;
+  padding: 20px;
+  height: 50px;
+}
+
+.btn:hover {
+  background: #2c1e55;
+  transform: scale(1.03);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}

@@ -90,9 +90,9 @@ export default function App() {
             <Route path="/dashboard/flashcards/:category" element={<FlashcardsList />} />
             <Route path="/dashboard/flashcards/:category/activity" element={<FlashcardsActivity />} />
             <Route path="/dashboard/userprofile" element={<UserProfile />} />
-            <Route path="*" element={<NotFound/>} />
           </Route>
         </Route>
+        <Route path="*" element={<NotFound/>} />
       </Routes>
     </>
   );
