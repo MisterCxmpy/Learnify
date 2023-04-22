@@ -15,11 +15,8 @@ CREATE TABLE users (
   PRIMARY KEY (user_id)
 );
 
-INSERT INTO users (username, email, password, isAdmin) VALUES ('dummy', 'dummy@learnify.org', 'dummy', FALSE);
+INSERT INTO users (username, email, password, isAdmin) VALUES ('admin', 'admin@learnify.org', 'admin', TRUE);
 INSERT INTO users (username, email, password, isAdmin) VALUES ('cosgun', 'cosgun@learnify.org', '$2b$10$0q.toeZZj9aCJm8kDWL6qO5c4zSk/3Z3Mue4egfAB/ZAiUG50TrF.', TRUE);
-
-
-
 
 CREATE TABLE quiz (
   question_id INT GENERATED ALWAYS AS IDENTITY,
@@ -32,6 +29,8 @@ CREATE TABLE quiz (
   fake_answer3 VARCHAR(256) NOT NULL,
   PRIMARY KEY (question_id)
 );
+
+--#region Quizzes Data
 
 INSERT INTO quiz (quiz_id, subject, question, answer, fake_answer1, fake_answer2, fake_answer3) VALUES (1, 'Geography GCSE', 'What is the process by which rocks are broken down by the action of water, wind, and ice?', 'Weathering', 'Erosion', 'Deposition', 'Uplift'),
 (1, 'Geography GCSE', 'What is the term for the line of longitude that is opposite to the Prime Meridian?', 'International Date Line', 'Equator', 'Tropic of Cancer', 'Tropic of Capricorn'),
@@ -304,6 +303,8 @@ INSERT INTO quiz (quiz_id, subject, question, answer, fake_answer1, fake_answer2
 (18, 'Religious Education A-Level', 'What is the name of the Islamic pilgrimage to Mecca?', 'Hajj', 'Umrah', 'Ramadan', 'Eid al-Fitr'),
 (18, 'Religious Education A-Level', 'What is the name of the Jewish text that contains the oral law and commentaries on the Torah?', 'Talmud', 'Torah', 'Mishnah', 'Midrash');
 
+--#endregion
+
 CREATE TABLE flashcard (
   card_id INT GENERATED ALWAYS AS IDENTITY,
   collection VARCHAR(100) NOT NULL,
@@ -313,6 +314,8 @@ CREATE TABLE flashcard (
   PRIMARY KEY (card_id),
   FOREIGN KEY (user_id) REFERENCES users("user_id")
 );
+
+--#region Flashcards Data
 
 INSERT INTO flashcard (collection, question, fact) VALUES
 ('Geography', 'What is the capital of Spain?', 'Madrid'),
@@ -496,6 +499,7 @@ INSERT INTO flashcard (collection, question, fact) VALUES
 ('Religious Education', 'What is the name of the Islamic holy month of fasting?', 'Ramadan'),
 ('Religious Education', 'Who is considered the last and final prophet in Islam?', 'Muhammad');
 
+--#endregion
 
 CREATE TABLE token (
   token_id INT GENERATED ALWAYS AS IDENTITY,
@@ -512,6 +516,15 @@ CREATE TABLE favorites (
   FOREIGN KEY (user_id) REFERENCES users("user_id"),
   FOREIGN KEY (card_id) REFERENCES flashcard("card_id") ON DELETE CASCADE,
   UNIQUE (user_id, card_id)
-
 );
 
+CREATE TABLE leaderboard (
+  leaderboard_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  score INT DEFAULT 0,
+  FOREIGN KEY (user_id) REFERENCES users("user_id"),
+  UNIQUE (user_id)
+);
+
+INSERT INTO leaderboard (user_id, score) VALUES
+(2, 0)
