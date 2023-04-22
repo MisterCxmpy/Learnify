@@ -31,10 +31,10 @@ class Leaderboard {
   }
 
   static async create(data) {
-    const { user_id, score, accuracy, quiz_played } = data;
+    const { id } = data;
     const response = await db.query(
       "INSERT INTO leaderboard (user_id, score, accuracy, quiz_played) VALUES ($1, $2, $3, $4) RETURNING *;",
-      [user_id, score, accuracy, quiz_played]
+      [id, 0, 0, 0]
     );
 
     return response.rows[0];
