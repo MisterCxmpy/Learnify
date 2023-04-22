@@ -522,6 +522,7 @@ CREATE TABLE favorites (
 CREATE TABLE leaderboard (
   leaderboard_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   user_id INTEGER NOT NULL,
+  subject VARCHAR(100) NOT NULL,
   score INT DEFAULT 0,
   accuracy INT DEFAULT 0,
   quiz_played INT DEFAULT 0,
@@ -529,5 +530,5 @@ CREATE TABLE leaderboard (
   UNIQUE (user_id)
 );
 
-INSERT INTO leaderboard (user_id, score, accuracy, quiz_played) VALUES
-(2, 0, 0, 0)
+INSERT INTO leaderboard (user_id, subject, score, accuracy, quiz_played) VALUES
+(2, 'Geography', 0, 0, 0)

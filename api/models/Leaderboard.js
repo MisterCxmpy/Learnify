@@ -1,9 +1,10 @@
 const db = require("../config/postgresdb");
 
 class Leaderboard {
-  constructor({ Leaderboard_id, user_id, score, accuracy, quiz_played }) {
+  constructor({ Leaderboard_id, user_id, subject, score, accuracy, quiz_played }) {
     this.Leaderboard_id = Leaderboard_id;
     this.user_id = user_id;
+    this.subject = subject;
     this.score = score;
     this.accuracy = accuracy;
     this.quiz_played = quiz_played;

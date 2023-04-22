@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
 import React, { useEffect, useState, useRef } from "react";
 
-export default function QuizQuestion({ questions, setIsFinished, score, setScore, setIncorrect }) {
+export default function QuizQuestion({ questions, setIsFinished, score, setScore, setIncorrect, subject }) {
   const [answers, setAnswers] = useState([]);
   const [question, setQuestion] = useState([]);
   const [count, setCount] = useState(0);
@@ -121,7 +121,7 @@ export default function QuizQuestion({ questions, setIsFinished, score, setScore
     const options = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({score: user?.score, accuracy: accuracy, quiz_played: quiz_played}),
+      body: JSON.stringify({subject: subject.split(" ")[0], score: user?.score, accuracy: accuracy, quiz_played: quiz_played}),
     };
 
     const response = await fetch(`http://localhost:8080/leaderboard/update/${userId}`, options)

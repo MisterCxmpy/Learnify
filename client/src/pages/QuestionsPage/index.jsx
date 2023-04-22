@@ -110,6 +110,7 @@ export default function QuestionsPage() {
               score={score}
               setScore={setScore}
               setIncorrect={setIncorrect}
+              subject={subject}
             />
           </div>
         </div>
