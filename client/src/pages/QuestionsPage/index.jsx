@@ -29,22 +29,6 @@ export default function QuestionsPage() {
     getQuestions();
   }, []);
 
-  async function updateScore(id, score, score_out_of) {
-    const options = {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        score: score,
-        score_out_of: score_out_of,
-      }),
-    };
-    const response = await fetch(
-      `http://localhost:8080/users/score/${id}`,
-      options
-    );
-    await response.json();
-  }
-
   async function createFlashcardFromIncorrect() {
     const counter = { count: 0 };
 
@@ -54,8 +38,6 @@ export default function QuestionsPage() {
         counter.count++;
       })
     );
-
-    console.log(`Created ${counter.count} flashcards`);
   }
 
   async function createFlashcard(question, answer) {
@@ -69,8 +51,6 @@ export default function QuestionsPage() {
         user_id: localStorage.getItem("user_id"),
       }),
     };
-
-    console.log(options.body)
 
     const res = await fetch(`http://localhost:8080/flashcards/`, options);
 
@@ -126,11 +106,9 @@ export default function QuestionsPage() {
             <h1 className={styles["title"]}>Quizzes</h1>
             <QuizQuestion
               questions={questions}
-              updateScore={updateScore}
               setIsFinished={setIsFinished}
               score={score}
               setScore={setScore}
-              incorrect={incorrect}
               setIncorrect={setIncorrect}
             />
           </div>

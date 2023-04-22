@@ -45,7 +45,7 @@ class Leaderboard {
     console.log(data)
     const response = await db.query(
       "UPDATE leaderboard SET score = $1, accuracy = $2, quiz_played = $3 WHERE user_id = $4 RETURNING *;",
-      [this.score + score, accuracy, quiz_played, this.user_id]
+      [score, accuracy, quiz_played, this.user_id]
     );
     if (response.rows.length != 1) {
       throw new Error("Unable to update score");

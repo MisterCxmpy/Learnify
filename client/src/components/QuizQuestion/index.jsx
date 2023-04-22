@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
 import React, { useEffect, useState, useRef } from "react";
 
-export default function QuizQuestion({ questions, updateScore, setIsFinished, score, setScore, incorrect, setIncorrect }) {
+export default function QuizQuestion({ questions, setIsFinished, score, setScore, setIncorrect }) {
   const [answers, setAnswers] = useState([]);
   const [question, setQuestion] = useState([]);
   const [count, setCount] = useState(0);
@@ -104,6 +104,56 @@ export default function QuizQuestion({ questions, updateScore, setIsFinished, sc
   useEffect(() => {
     handleSubmit();
   }, [toggle]);
+
+  
+  const updateLeaderboard = async () => {
+
+    const userId = localStorage.getItem('user_id');
+
+    const userResponse = await fetch(`http://localhost:8080/users/username/single/${userId}`, {
+      
+    });
+    const user = await userResponse.json();
+
+    const accuracy = user?.score_out_of == 0 ? 0 : Math.round((user?.score/user?.score_out_of) * 100)
+    const quiz_played = Math.floor(user?.score_out_of / 10)
+
+    const options = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({score: user?.score, accuracy: accuracy, quiz_played: quiz_played}),
+    };
+
+    const response = await fetch(`http://localhost:8080/leaderboard/update/${userId}`, options)
+
+    const data = await response.json()
+    
+    console.log(data)
+
+    if (response.ok) {
+      console.log("Successfully updated user leaderboard entry!")
+    } else {
+      console.log("Updating user leaderboard entry failed!")
+    }
+  }
+
+  async function updateScore(id, score, score_out_of) {
+    const options = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        score: score,
+        score_out_of: score_out_of,
+      }),
+    };
+    const response = await fetch(
+      `http://localhost:8080/users/score/${id}`,
+      options
+    );
+    await response.json();
+
+    updateLeaderboard()
+  }
 
   return (
     <>
