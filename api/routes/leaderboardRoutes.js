@@ -5,8 +5,9 @@ const leaderboardController = require('../controllers/leaderboardController');
 const leaderboardRouter = Router();
 
 leaderboardRouter.get("/", leaderboardController.index);
-leaderboardRouter.get("/:id", leaderboardController.show);
+leaderboardRouter.get("/entry/:subject/:id", leaderboardController.show);
+leaderboardRouter.get("/subject/:subject", leaderboardController.subject);
 leaderboardRouter.post("/", leaderboardController.create);
-leaderboardRouter.patch("/update/:id", leaderboardController.update);
+leaderboardRouter.patch("/update/:subject/:id", leaderboardController.update);
 
 module.exports = leaderboardRouter;

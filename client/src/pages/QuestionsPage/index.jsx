@@ -57,8 +57,8 @@ export default function QuestionsPage() {
     if (!res.ok) {
       console.log("Failed to create flashcard");
     }
-    
-    navigate("/dashboard")
+
+    navigate("/dashboard");
   }
 
   function displayQuestion() {
@@ -95,9 +95,16 @@ export default function QuestionsPage() {
               <button onClick={() => navigate(-1)} className={styles["btn"]}>
                 Return to Categories
               </button>
-              <button onClick={createFlashcardFromIncorrect} className={styles["btn"]}>
-                Turn incorrect to Flashcards
-              </button>
+              {incorrect.length > 0 ? (
+                <button
+                  onClick={createFlashcardFromIncorrect}
+                  className={styles["btn"]}
+                >
+                  Turn incorrect to Flashcards
+                </button>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>

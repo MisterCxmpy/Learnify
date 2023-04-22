@@ -1,0 +1,72 @@
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(43, 43, 43, 0.527);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leaderboard-options {
+  position: relative;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+}
+
+.leaderboard-title {
+  position: absolute;
+  color: var(--font-colour);
+  left: 0%;
+  width: 100%;
+  pointer-events: none;
+  text-align: center;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  background: #5e37c9;
+  min-width: 800px;
+  width: max-content;
+  min-height: 900px;
+  height: max-content;
+  border-radius: 15px;
+  padding: 20px;
+  border: 7px solid var(--nav-colour);
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: none;
+  height: 45px;
+  background: var(--nav-colour);
+  font-size: 3rem;
+  color: #d4d4d4;
+  cursor: pointer;
+  transition: 0.25s;
+  text-decoration: none;
+}
+
+.table {
+  width: 100%;
+}
+
+.table-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.table-heading {
+  text-align: left;
+  flex: 1;
+}

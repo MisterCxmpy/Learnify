@@ -1,9 +1,10 @@
 const db = require("../config/postgresdb");
 
 class Leaderboard {
-  constructor({ Leaderboard_id, user_id, subject, score, accuracy, quiz_played }) {
+  constructor({ Leaderboard_id, user_id, username, subject, score, accuracy, quiz_played }) {
     this.Leaderboard_id = Leaderboard_id;
     this.user_id = user_id;
+    this.username = username;
     this.subject = subject;
     this.score = score;
     this.accuracy = accuracy;
@@ -20,33 +21,43 @@ class Leaderboard {
     return response.rows.map((f) => new Leaderboard(f));
   }
 
-  static async getById(id) {
+  static async getById(id, subject) {
     const response = await db.query(
-      "SELECT * FROM leaderboard WHERE user_id = $1;",
-      [id]
-    );
+      "SELECT * FROM leaderboard WHERE user_id = $1 AND subject = $2;",
+      [id, subject]
+      );
     if (response.rows.length != 1) {
       throw new Error("User not found in leaderboard!");
     }
     return new Leaderboard(response.rows[0]);
   }
 
-  static async create(data) {
-    const { id } = data;
+  static async getBySubject(subject) {
     const response = await db.query(
-      "INSERT INTO leaderboard (user_id, score, accuracy, quiz_played) VALUES ($1, $2, $3, $4) RETURNING *;",
-      [id, 0, 0, 0]
+      "SELECT * FROM leaderboard WHERE subject = $1 ORDER BY score DESC;",
+      [subject]
     );
+    if (response.rows.length != 1) {
+      throw new Error("Subject not found in leaderboard!");
+    }
+    return new Leaderboard(response.rows[0]);
+  }
+  
+  static async create(data) {
+    const { user_id, username, subject, score, accuracy, quiz_played } = data;
 
+    const response = await db.query(
+      "INSERT INTO leaderboard (user_id, username, subject, score, accuracy, quiz_played) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;",
+      [user_id, username, subject, score, accuracy, quiz_played]
+    );
     return response.rows[0];
   }
 
   async update(data) {
-    const { score, accuracy, quiz_played } = data;
-    console.log(data)
+    const { subject, score, accuracy, quiz_played } = data;
     const response = await db.query(
-      "UPDATE leaderboard SET score = $1, accuracy = $2, quiz_played = $3 WHERE user_id = $4 RETURNING *;",
-      [score, accuracy, quiz_played, this.user_id]
+      "UPDATE leaderboard SET subject = $1, score = $2, accuracy = $3, quiz_played = $4 WHERE user_id = $5 AND subject = $1 RETURNING *;",
+      [subject, score, accuracy, quiz_played, this.user_id]
     );
     if (response.rows.length != 1) {
       throw new Error("Unable to update score");

@@ -27,3 +27,37 @@
   grid-gap: 30px;
   padding-bottom: 20px;
 }
+
+.options {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: none;
+  height: 100%;
+  background: var(--nav-colour);
+  font-size: 20px;
+  padding: 20px;
+  color: #d4d4d4;
+  cursor: pointer;
+  transition: 0.25s;
+  text-decoration: none;  
+  width: 200px;
+}
+
+.btn:hover {
+  background: #2c1e55;
+  transform: scale(1.03);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
