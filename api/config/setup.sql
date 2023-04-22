@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS flashcard CASCADE;
 DROP TABLE IF EXISTS token CASCADE;
 DROP TABLE IF EXISTS favorites CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS leaderboard CASCADE;
 
 CREATE TABLE users (
   user_id INT GENERATED ALWAYS AS IDENTITY,
@@ -522,9 +523,11 @@ CREATE TABLE leaderboard (
   leaderboard_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   user_id INTEGER NOT NULL,
   score INT DEFAULT 0,
+  accuracy INT DEFAULT 0,
+  quiz_played INT DEFAULT 0,
   FOREIGN KEY (user_id) REFERENCES users("user_id"),
   UNIQUE (user_id)
 );
 
-INSERT INTO leaderboard (user_id, score) VALUES
-(2, 0)
+INSERT INTO leaderboard (user_id, score, accuracy, quiz_played) VALUES
+(2, 0, 0, 0)
