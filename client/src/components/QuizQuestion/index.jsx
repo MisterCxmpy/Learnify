@@ -2,7 +2,14 @@ import { useNavigate } from "react-router-dom";
 import styles from "./index.module.css";
 import React, { useEffect, useState, useRef } from "react";
 
-export default function QuizQuestion({ questions, setIsFinished, score, setScore, setIncorrect, subject }) {
+export default function QuizQuestion({
+  questions,
+  setIsFinished,
+  score,
+  setScore,
+  setIncorrect,
+  subject,
+}) {
   const [toggle, setToggle] = useState(false);
   const [answers, setAnswers] = useState([]);
   const [question, setQuestion] = useState([]);
@@ -46,7 +53,7 @@ export default function QuizQuestion({ questions, setIsFinished, score, setScore
       );
       setCount(count + 1);
       setToggle(false);
-      setIsFinished(false)
+      setIsFinished(false);
       let i = 0;
       for (const o of optionsRef.current.children) {
         o.style.background = getColours()[Object.keys(getColours())[i]].primary;
@@ -58,13 +65,13 @@ export default function QuizQuestion({ questions, setIsFinished, score, setScore
       }
     } else {
       setToggle(true);
-      setIsFinished(true)
+      setIsFinished(true);
     }
   };
 
   useEffect(() => {
     updateQuestion();
-    setToggle(false)
+    setToggle(false);
   }, []);
 
   const handleCheck = (e) => {
@@ -87,7 +94,10 @@ export default function QuizQuestion({ questions, setIsFinished, score, setScore
     if (e.target.textContent == question.answer) {
       setScore(score + 1);
     } else {
-      setIncorrect((incorrect => [...incorrect, {question: question.question, answer: question.answer}]))
+      setIncorrect((incorrect) => [
+        ...incorrect,
+        { question: question.question, answer: question.answer },
+      ]);
     }
 
     const timer = setTimeout(() => {
@@ -106,59 +116,77 @@ export default function QuizQuestion({ questions, setIsFinished, score, setScore
     handleSubmit();
   }, [toggle]);
 
-  
   const updateLeaderboard = async (_score, _score_out_of) => {
+    const userId = localStorage.getItem("user_id");
 
-    const userId = localStorage.getItem('user_id');
-
-    const userResponse = await fetch(`http://localhost:8080/leaderboard/entry/${subject.split(" ")[0]}/${userId}`, {
-      
-    });
+    const userResponse = await fetch(
+      `http://localhost:8080/leaderboard/entry/${
+        subject.split(" ")[0]
+      }/${userId}`,
+      {}
+    );
     const user = await userResponse.json();
 
-    const { score, quiz_played } = user
+    const { score, quiz_played } = user;
 
-    console.log(score, _score)
-
-    const newScore = (score ?? 0) + _score
-    const newQuizPlayed = (quiz_played ?? 0) + 1
-    const newAccuracy = Math.round((newScore / (10 * newQuizPlayed ?? _score_out_of)) * 100);
+    const newScore = (score ?? 0) + _score;
+    const newQuizPlayed = (quiz_played ?? 0) + 1;
+    const newAccuracy = Math.round(
+      (newScore / (10 * newQuizPlayed ?? _score_out_of)) * 100
+    );
 
     const options = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({subject: subject.split(" ")[0], score: newScore, accuracy: newAccuracy, quiz_played: newQuizPlayed}),
+      body: JSON.stringify({
+        subject: subject.split(" ")[0],
+        score: newScore,
+        accuracy: newAccuracy,
+        quiz_played: newQuizPlayed,
+      }),
     };
 
-
-    const response = await fetch(`http://localhost:8080/leaderboard/update/${subject.split(" ")[0]}/${userId}`, options)
-
+    const response = await fetch(
+      `http://localhost:8080/leaderboard/update/${
+        subject.split(" ")[0]
+      }/${userId}`,
+      options
+    );
 
     if (response.ok) {
-      console.log("Successfully updated user leaderboard entry!")
+      console.log("Successfully updated user leaderboard entry!");
     } else {
+      const userResponse = await fetch(
+        `http://localhost:8080/users/username/single/${userId}`
+      );
 
-      const userResponse = await fetch(`http://localhost:8080/users/username/single/${userId}`)
-
-      const user = await userResponse.json()
+      const user = await userResponse.json();
 
       const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({user_id: userId, username: user.username, subject: subject.split(" ")[0], score: newScore, accuracy: newAccuracy, quiz_played: newQuizPlayed}),
+        body: JSON.stringify({
+          user_id: userId,
+          username: user.username,
+          subject: subject.split(" ")[0],
+          score: newScore,
+          accuracy: newAccuracy,
+          quiz_played: newQuizPlayed,
+        }),
       };
 
-      const response = await fetch(`http://localhost:8080/leaderboard/`, options)
-
-      console.log(await response.json())
+      const response = await fetch(
+        `http://localhost:8080/leaderboard/`,
+        options
+      );
 
       if (response.ok) {
-        console.log("Successfully created user leaderboard entry!")
+        console.log("Successfully created user leaderboard entry!");
       } else {
-        console.log("Failed to update and create user leaderboard entry!")
+        console.log("Failed to update and create user leaderboard entry!");
       }
     }
-  }
+  };
 
   async function updateScore(id, score, score_out_of) {
     const options = {
@@ -175,7 +203,7 @@ export default function QuizQuestion({ questions, setIsFinished, score, setScore
     );
     await response.json();
 
-    updateLeaderboard(score, score_out_of)
+    updateLeaderboard(score, score_out_of);
   }
 
   return (

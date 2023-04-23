@@ -58,7 +58,7 @@ class Flashcard {
         return response.rows[0];
     }
 
-   static async destroy() {
+  async destroy() {
         await db.query("DELETE FROM flashcard WHERE card_id = $1 RETURNING *;", 
         [this.card_id]);
         return null;

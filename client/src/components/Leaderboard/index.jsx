@@ -44,9 +44,7 @@ export default function Leaderboard({ leaderboardOpen, setLeaderboardOpen }) {
             onChange={(e) => setSubject(e.target.value)}
             className={styles["leaderboard-subjects"]}
           >
-            <option value="Geography" selected>
-              Geography
-            </option>
+            <option value="Geography" defaultValue>Geography</option>
             <option value="History">History</option>
             <option value="Chemistry">Chemistry</option>
             <option value="Biology">Biology</option>

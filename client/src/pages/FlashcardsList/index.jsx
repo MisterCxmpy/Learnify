@@ -81,16 +81,17 @@ export default function FlashcardsList() {
               </div>
             </div>
             <div className={styles["cards"]}>
-              {flashcards.map((f) => {
+              {flashcards.length > 0 ? flashcards.map((f) => {
                 return (
                   <Flashcard
                     key={f.card_id}
                     f={f}
                     favourites={favourites}
                     setFavourites={setFavourites}
+                    getData={getData}
                   />
                 );
-              })}
+              }) : ""}
             </div>
           </div>
         </div>

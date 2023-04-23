@@ -74,6 +74,24 @@
   font-size: 3rem;
   cursor: pointer;
   z-index: 100;
+  width: 60px;
+  height: 85px;
+  text-shadow: 1px 0 #000000, -1px 0 #000000, 0 1px #000000, 0 -1px #000000,
+               1px 1px #000000, -1px -1px #000000, 1px -1px #000000, -1px 1px #000000;
+}
+
+.removeBtn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  border: none;
+  color: var(--font-colour-dark);
+  font-size: 3rem;
+  width: 60px;
+  height: 85px;
+  cursor: pointer;
+  z-index: 100;
   text-shadow: 1px 0 #000000, -1px 0 #000000, 0 1px #000000, 0 -1px #000000,
                1px 1px #000000, -1px -1px #000000, 1px -1px #000000, -1px 1px #000000;
 }

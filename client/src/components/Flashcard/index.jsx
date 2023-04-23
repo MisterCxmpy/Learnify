@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./index.module.css"
 
-export default function Flashcard({f, favourites, setFavourites}) {
+export default function Flashcard({f, favourites, setFavourites, getData}) {
 
   const [flippedCards, setFlippedCards] = useState([]);
 
@@ -37,6 +37,17 @@ export default function Flashcard({f, favourites, setFavourites}) {
     } else {
       setFlippedCards([...flippedCards, cardId]);
     }
+  }
+
+  async function deleteCard(e, cardId) {
+    e.stopPropagation();
+    const options = {
+      method: "DELETE"
+    }
+
+    const response = await fetch(`http://localhost:8080/flashcards/${cardId}`, options)
+
+    getData()
   }
 
   const handleFavorites = async (e, cardId) => {
@@ -91,6 +102,9 @@ export default function Flashcard({f, favourites, setFavourites}) {
         onClick={(e) => handleFavorites(e, f.card_id)}
       >
         ★
+      </button>
+      <button className={`${styles["removeBtn"]}`} onClick={(e) => deleteCard(e, f.card_id)} >
+        &times;
       </button>
       <div className={styles["front"]}>
         <h1 className={styles["flashcard-title"]}>{f.collection}</h1>
