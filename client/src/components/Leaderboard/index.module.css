@@ -80,3 +80,15 @@
   flex: 1;
   font-size: 18px;
 }
+
+.leaderboard-subjects {
+  width: 200px;
+  padding: 5px;
+  margin: 5px;
+  font-size: 1.2rem;
+}
+
+.table > tbody {
+  height: 663px;
+  overflow-y: auto;
+}
