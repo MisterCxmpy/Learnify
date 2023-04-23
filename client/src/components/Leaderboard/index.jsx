@@ -39,27 +39,31 @@ export default function Leaderboard({ leaderboardOpen, setLeaderboardOpen }) {
             <tr className={styles["table-row"]}>
               <th className={styles["table-heading"]}>Rank</th>
               <th className={styles["table-heading"]}>Username</th>
-              <th className={styles["table-heading"]}>Subject</th>
               <th className={styles["table-heading"]}>Score</th>
               <th className={styles["table-heading"]}>Accuracy</th>
-              <th className={styles["table-heading"]}>Quizzes Played</th>
+              <th className={styles["table-heading"]}>Times Played</th>
             </tr>
           </thead>
           <tbody>
             {leaderboard.length > 0
-              ? leaderboard.map((l, i) => {
-                  return (
-                    <tr key={i} className={styles["table-row"]}>
-                      <td className={styles["table-heading"]}>#{i + 1}</td>
-                      <td className={styles["table-heading"]}>{l.username}</td>
-                      <td className={styles["table-heading"]}>{l.subject}</td>
-                      <td className={styles["table-heading"]}>{l.score}</td>
-                      <td className={styles["table-heading"]}>{l.accuracy}%</td>
-                      <td className={styles["table-heading"]}>
-                        {l.quiz_played}
-                      </td>
-                    </tr>
-                  );
+              ? leaderboard.map((entry) => {
+                  return entry.map((e, i) => {
+                    return (
+                      <tr key={i} className={styles["table-row"]}>
+                        <td className={styles["table-heading"]}>#{i + 1}</td>
+                        <td className={styles["table-heading"]}>
+                          {e.username}
+                        </td>
+                        <td className={styles["table-heading"]}>{e.score}</td>
+                        <td className={styles["table-heading"]}>
+                          {e.accuracy}%
+                        </td>
+                        <td className={styles["table-heading"]}>
+                          {e.quiz_played}
+                        </td>
+                      </tr>
+                    );
+                  });
                 })
               : null}
           </tbody>

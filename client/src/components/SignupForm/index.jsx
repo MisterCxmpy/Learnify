@@ -41,7 +41,7 @@ export default function SignupForm() {
       </div>
       <form role='form' onSubmit={signup}>
         <div className={styles["input"]}>
-          <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
+          <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} maxLength={12} required />
           <span>Username</span>
         </div>
         <div className={styles["input"]}>

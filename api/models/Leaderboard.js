@@ -37,10 +37,10 @@ class Leaderboard {
       "SELECT * FROM leaderboard WHERE subject = $1 ORDER BY score DESC;",
       [subject]
     );
-    if (response.rows.length != 1) {
+    if (response.rows.length === 0) {
       throw new Error("Subject not found in leaderboard!");
     }
-    return new Leaderboard(response.rows[0]);
+    return response.rows.map((f) => new Leaderboard(f));
   }
   
   static async create(data) {
