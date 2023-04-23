@@ -7,6 +7,7 @@ const flashcardRouter = Router();
 
 flashcardRouter.get("/", flashCardController.index);
 flashcardRouter.get("/:subject", flashCardController.getBySubject);
+flashcardRouter.get("/:subject/:id", flashCardController.getBySubjectAndUser);
 flashcardRouter.get("/single/:id", flashCardController.show);
 flashcardRouter.get("/user/:id", flashCardController.getByUserId);
 flashcardRouter.post("/", flashCardController.create);

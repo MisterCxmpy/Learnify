@@ -12,7 +12,7 @@ export default function FlashcardsList() {
 
   const getData = async () => {
     const response = await fetch(
-      `http://localhost:8080/flashcards/${category}`
+      `http://localhost:8080/flashcards/${category}/${localStorage.getItem("user_id")}`
     );
 
     const data = await response.json();

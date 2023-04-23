@@ -76,6 +76,20 @@ async function getBySubject(req, res) {
     }
   }
 
+async function getBySubjectAndUser(req, res) {
+    try {
+      const subject = req.params.subject;
+      const id = req.params.id;
+      const flashcards = await Flashcard.getBySubjectAndUser(subject, id);
+      if (flashcards.length === 0) {
+        return res.status(404).json({ error: `No flashcards found with the subject: ${subject}` });
+      }
+      res.status(200).json(flashcards);
+    } catch (err) {
+      res.status(404).json({ error: err.message });
+    }
+  }
+
   
   async function addFavorite(req, res) {
     try {
@@ -139,4 +153,4 @@ async function getBySubject(req, res) {
   
   
 
-module.exports = { index, show, create, destroy, getByUserId, getBySubject, addFavorite, getFavoritesByUserId, deleteFavorite}
+module.exports = { index, show, create, destroy, getByUserId, getBySubject, getBySubjectAndUser, addFavorite, getFavoritesByUserId, deleteFavorite}

@@ -40,8 +40,17 @@ class Flashcard {
         }
         return response.rows.map((a) => new Flashcard(a));
     }
+
     static async getBySubject(subject) {
         const response = await db.query("SELECT * FROM flashcard WHERE collection = $1", [subject]);
+        if (response.rows.length === 0) {
+            throw new Error("No flashcards available for this subject");
+        }
+        return response.rows.map((f) => new Flashcard(f));
+    }
+
+    static async getBySubjectAndUser(subject, id) {
+        const response = await db.query("SELECT * FROM flashcard WHERE collection = $1 AND user_id = 1 or user_id = $2", [subject, id]);
         if (response.rows.length === 0) {
             throw new Error("No flashcards available for this subject");
         }
