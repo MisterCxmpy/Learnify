@@ -60,7 +60,7 @@ describe('EmbeddedNav Component', () => {
               body: JSON.stringify(data),
             };
         
-            const res = await fetch(`http://localhost:8080/users/login`, options);
+            const res = await fetch(`https://learnify-api-c1uk.onrender.com/users/login`, options);
         
             const { token, authenticated } = await res.json();
             

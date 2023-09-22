@@ -43,7 +43,7 @@ export default function FlashcardsActivity() {
 
   const getData = async () => {
     const response = await fetch(
-      `http://localhost:8080/flashcards/${category}`
+      `https://learnify-api-c1uk.onrender.com/flashcards/${category}`
     );
 
     const data = await response.json();

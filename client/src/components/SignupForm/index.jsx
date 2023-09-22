@@ -25,7 +25,7 @@ export default function SignupForm() {
       body: JSON.stringify(data),
     };
 
-    const res = await fetch(`http://localhost:8080/users/register`, options);
+    const res = await fetch(`https://learnify-api-c1uk.onrender.com/users/register`, options);
     
     if (res.ok) {
       navigate("/login")

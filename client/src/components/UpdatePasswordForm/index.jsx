@@ -26,7 +26,7 @@ export default function UpdateDetailsForm({user}) {
           body: JSON.stringify(data),
         };
     
-        const res = await fetch(`http://localhost:8080/users/password/${user.id}`, options);
+        const res = await fetch(`https://learnify-api-c1uk.onrender.com/users/password/${user.id}`, options);
         const data2 = await res.json()
 
             

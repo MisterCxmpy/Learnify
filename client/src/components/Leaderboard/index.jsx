@@ -9,7 +9,7 @@ export default function Leaderboard({ leaderboardOpen, setLeaderboardOpen }) {
   useEffect(() => {
     const getLeaderboard = async () => {
       const response = await fetch(
-        `http://localhost:8080/leaderboard/subject/${subject}`
+        `https://learnify-api-c1uk.onrender.com/leaderboard/subject/${subject}`
       );
 
       const data = await response.json();

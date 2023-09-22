@@ -120,7 +120,7 @@ export default function QuizQuestion({
     const userId = localStorage.getItem("user_id");
 
     const userResponse = await fetch(
-      `http://localhost:8080/leaderboard/entry/${
+      `https://learnify-api-c1uk.onrender.com/leaderboard/entry/${
         subject.split(" ")[0]
       }/${userId}`,
       {}
@@ -147,7 +147,7 @@ export default function QuizQuestion({
     };
 
     const response = await fetch(
-      `http://localhost:8080/leaderboard/update/${
+      `https://learnify-api-c1uk.onrender.com/leaderboard/update/${
         subject.split(" ")[0]
       }/${userId}`,
       options
@@ -157,7 +157,7 @@ export default function QuizQuestion({
       console.log("Successfully updated user leaderboard entry!");
     } else {
       const userResponse = await fetch(
-        `http://localhost:8080/users/username/single/${userId}`
+        `https://learnify-api-c1uk.onrender.com/users/username/single/${userId}`
       );
 
       const user = await userResponse.json();
@@ -176,7 +176,7 @@ export default function QuizQuestion({
       };
 
       const response = await fetch(
-        `http://localhost:8080/leaderboard/`,
+        `https://learnify-api-c1uk.onrender.com/leaderboard/`,
         options
       );
 
@@ -198,7 +198,7 @@ export default function QuizQuestion({
       }),
     };
     const response = await fetch(
-      `http://localhost:8080/users/score/${id}`,
+      `https://learnify-api-c1uk.onrender.com/users/score/${id}`,
       options
     );
     await response.json();

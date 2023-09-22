@@ -10,7 +10,7 @@ export default function Dashboard() {
 
   const fetchFavourites = async () => {
     const response = await fetch(
-      `http://localhost:8080/flashcards/favorite/user/${localStorage.getItem("user_id")}`
+      `https://learnify-api-c1uk.onrender.com/flashcards/favorite/user/${localStorage.getItem("user_id")}`
     );
 
     const data = await response.json();
@@ -22,7 +22,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchUser = async () => {
       const response = await fetch(
-        `http://localhost:8080/users/username/${localStorage.getItem("user_id")}`
+        `https://learnify-api-c1uk.onrender.com/users/username/${localStorage.getItem("user_id")}`
       );
       const data = await response.text();
       setUsername(data);
@@ -30,7 +30,7 @@ export default function Dashboard() {
     
     const fetchUserCreated = async () => {
       const response = await fetch(
-        `http://localhost:8080/flashcards/user/${localStorage.getItem("user_id")}`
+        `https://learnify-api-c1uk.onrender.com/flashcards/user/${localStorage.getItem("user_id")}`
       );
       const data = await response.json();
       if (response.ok) {

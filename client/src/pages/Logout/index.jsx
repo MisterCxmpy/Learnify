@@ -14,7 +14,7 @@ export default function index() {
       body: JSON.stringify({ token: localStorage.getItem("token") }),
     };
 
-    const res = await fetch(`http://localhost:8080/users/logout`, options);
+    const res = await fetch(`https://learnify-api-c1uk.onrender.com/users/logout`, options);
     
     if (res.ok) {
       localStorage.clear()

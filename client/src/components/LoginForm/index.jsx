@@ -19,7 +19,7 @@ export default function LoginForm() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     };
-    const res = await fetch(`http://localhost:8080/users/login`, options);
+    const res = await fetch(`https://learnify-api-c1uk.onrender.com/users/login`, options);
     const { token, authenticated, user_id } = await res.json();
     if (res.ok) {
       localStorage.setItem("token", token);

@@ -12,7 +12,7 @@ export default function FlashcardsList() {
 
   const getData = async () => {
     const response = await fetch(
-      `http://localhost:8080/flashcards/${category}/${localStorage.getItem("user_id")}`
+      `https://learnify-api-c1uk.onrender.com/flashcards/${category}/${localStorage.getItem("user_id")}`
     );
 
     const data = await response.json();
@@ -28,7 +28,7 @@ export default function FlashcardsList() {
   const checkFavorites = async () => {
     const userId = localStorage.getItem("user_id");
     const response = await fetch(
-      `http://localhost:8080/flashcards/favorite/user/${userId}/`
+      `https://learnify-api-c1uk.onrender.com/flashcards/favorite/user/${userId}/`
     );
 
     const data = await response.json();

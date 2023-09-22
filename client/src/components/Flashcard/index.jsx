@@ -45,7 +45,7 @@ export default function Flashcard({f, favourites, setFavourites, getData}) {
       method: "DELETE"
     }
 
-    const response = await fetch(`http://localhost:8080/flashcards/${cardId}`, options)
+    const response = await fetch(`https://learnify-api-c1uk.onrender.com/flashcards/${cardId}`, options)
 
     getData()
   }
@@ -55,7 +55,7 @@ export default function Flashcard({f, favourites, setFavourites, getData}) {
     const userId = localStorage.getItem("user_id");
 
     const response = await fetch(
-      `http://localhost:8080/flashcards/favorite/user/${userId}/card/${cardId}`,
+      `https://learnify-api-c1uk.onrender.com/flashcards/favorite/user/${userId}/card/${cardId}`,
       {
         method: favourites.includes(cardId) ? "DELETE" : "POST",
         headers: {

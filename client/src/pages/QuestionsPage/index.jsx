@@ -15,7 +15,7 @@ export default function QuestionsPage() {
 
   async function getQuestions() {
     const category = subject ? subject.toLowerCase() : undefined;
-    const response = await fetch(`http://localhost:8080/quiz/${category}`);
+    const response = await fetch(`https://learnify-api-c1uk.onrender.com/quiz/${category}`);
     const data = await response.json();
 
     if (Array.isArray(data) && data.length > 0) {
@@ -52,7 +52,7 @@ export default function QuestionsPage() {
       }),
     };
 
-    const res = await fetch(`http://localhost:8080/flashcards/`, options);
+    const res = await fetch(`https://learnify-api-c1uk.onrender.com/flashcards/`, options);
 
     if (!res.ok) {
       console.log("Failed to create flashcard");

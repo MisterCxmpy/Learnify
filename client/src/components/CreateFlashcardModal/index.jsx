@@ -67,7 +67,7 @@ export default function CreateFlashcardModal({ showModal, setShowModal, getData,
       body: JSON.stringify({ collection: subject, question: question, fact: answer, user_id: localStorage.getItem("user_id") })
       };
     
-      const res = await fetch(`http://localhost:8080/flashcards/`, options);
+      const res = await fetch(`https://learnify-api-c1uk.onrender.com/flashcards/`, options);
       
       if (res.ok) {
         setAnswer("")
