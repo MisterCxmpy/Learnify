@@ -35,8 +35,7 @@
   background: #5e37c9;
   min-width: 800px;
   width: max-content;
-  min-height: 900px;
-  height: max-content;
+  height: 90%;
   border-radius: 15px;
   padding: 20px;
   border: 7px solid var(--nav-colour);
